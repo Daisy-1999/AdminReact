@@ -6,8 +6,16 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
+    "antd": "^4.9.4",
+    "axios": "^0.21.1",
+    "babel-plugin-import": "^1.13.3",
+    "customize-cra": "^1.0.0",
+    "less": "^3.13.0",
+    "less-loader": "^7.1.0",
     "react": "^17.0.1",
+    "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
@@ -34,5 +42,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://120.55.193.14:5000"
 }
