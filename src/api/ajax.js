@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import qs from 'qs';
+import { message } from 'antd';
 
 
 // 添加请求拦截器：让post请求的请求体格式为urlencoded格式 a=1&b=2
@@ -18,14 +19,14 @@ axios.interceptors.request.use(function (config) {
 
   
   // 添加响应拦截器
-  //1，让请求成功的结果不再是response，而是response.data的值
-  //2，
-  //在请求返回之后且在我们指定的请求回调函数之前
+  // 1，让请求成功的结果不再是response，而是response.data的值
+  // 2，
+  // 在请求返回之后且在我们指定的请求回调函数之前
   axios.interceptors.response.use(function (response) {
       // 对响应数据做点什么
       return response.data;
     }, function (error) {  //统一处理所有请求的异常错误
-        alert('response interceptor error()')
+        message.error('请求出错' + error.message)
       // 对响应错误做点什么
      //return Promise.reject(error);
       return new Promise(() => {}) //返回一个pending状态的promise，中断promise链

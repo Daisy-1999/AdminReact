@@ -1,21 +1,48 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+
+import storageUtils from '../../utils/storageUtils'
+import memoryUtils from '../../utils/memoryUtils'
+import { reqLogin } from '../../api/index.js'
 
 import logo from './images/logo.png';
 import './login.less';
 
 const Item = Form.Item;
-
 export class Login extends Component {
 
-  
-  handleSubmit(values){
-   
-    
-  }
+  formRef = React.createRef();
+
+  onFinish = values => {
+      this.formRef.current.validateFields().then(async values => {
+        reqLogin()
+        // Do something with value
+        const result = await reqLogin(values.username, values.password)
+        //console.log(result)
+        
+        if(result.status === 0){
+            const user = result.data
+           // localStorage.setItem('user_key', JSON.stringify(user))
+           storageUtils.saveUser(user) //保存在本地中
+            memoryUtils.user = user //保存在文件中
+            this.props.history.replace('/')
+            message.success('登陆成功')
+          } else{
+              message.error(result.msg)
+          }
+        })
+      }
+
     render() {
+      const user = memoryUtils.user
+        if(user._id){
+           // this.props.history.replace('/login') 用于事件回调函数
+           return <Redirect to='/' />
+        }
+      
         return (
             <div className="login">
                 <div className="login_header">
@@ -24,11 +51,11 @@ export class Login extends Component {
                 </div>
                 <div className="login_content">
                     <h1>用户登录</h1>
-                    <Form  
-                      onFinish={this.handleSubmit}
-                      name="normal_login"
-                      className="login-form"
-                      initialValues={{ remember: true }}>
+                   <Form ref={this.formRef}
+                     name="normal_login"
+                     className="login-form"
+                     initialValues={{ remember: true }}
+                     onFinish={this.onFinish}>
                       <Item
                         name="username"
                         rules={[{ required: true, message: 'Please input your Username!' },
