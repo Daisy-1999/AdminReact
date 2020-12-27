@@ -8,7 +8,7 @@ import storageUtils from '../../utils/storageUtils'
 import memoryUtils from '../../utils/memoryUtils'
 import { reqLogin } from '../../api/index.js'
 
-import logo from './images/logo.png';
+import logo from '../../assets/images/logo.png';
 import './login.less';
 
 const Item = Form.Item;

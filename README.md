@@ -26,3 +26,16 @@
             兼容不同浏览器
     memoryUtils.js
         用来在内存中保存数据（user）的工具类
+
+## 抽取通用的类链接按钮组件
+    通过...透传所有接收的属性: <Button {...props} />    <LinkButton>xxxx</LinkButton>
+    组件标签的所有子节点都会成为组件的children属性
+
+## 使用react-router
+    withRouter(): 包装非路由组件, 给其传入history/location/match属性
+    history: push()/replace()/goBack()
+    location: pathname属性
+    match: params属性
+## componentWillMount与componentDidMount的比较
+    componentWillMount: 在第一次render()前调用一次, 为第一次render()准备数据(同步)
+    componentDidMount: 在第一次render()之后调用一次, 启动异步任务, 后面异步更新状态重新render
