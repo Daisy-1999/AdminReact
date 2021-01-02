@@ -39,3 +39,31 @@
 ## componentWillMount与componentDidMount的比较
     componentWillMount: 在第一次render()前调用一次, 为第一次render()准备数据(同步)
     componentDidMount: 在第一次render()之后调用一次, 启动异步任务, 后面异步更新状态重新render
+
+## 区别call()/apply()/bind()
+## 自定义实现bind()
+
+    Function.prototype.bind = function(obj){
+        //arguments：调用bind函数时传递的实参伪数组
+        const self = this
+        return function(){
+            self.apply(obj, arguments)
+        }
+    }
+
+    函数对象：将一个函数作为对象使用
+    实例对象：new函数调用产生的对象，简称对象
+    function fn(a, b){
+        console.log(a, b, this.m)
+    }
+
+    const obj = {m: 1}
+
+    fn.call(obj, 2, 3, 4) //调用fn这个函数  //2 3 1
+    fn.apply(obj, [2, 3, 4]) //必须传入数组 //2 3 1  
+    与call的区别就是传参的区别
+
+    //const fn2 = fn.bind(obj)
+    fn.bind(obj)(2,3) 2 3 1
+    fn.bind(obj, 5)(2, 3) 5 2 1
+    fn.bind(obj, 5, 6)(2, 3) 5 6 1
