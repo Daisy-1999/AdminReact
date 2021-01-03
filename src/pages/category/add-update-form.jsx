@@ -8,17 +8,25 @@ const Item = Form.Item;
  class AddUpdateForm extends Component {
     formRef = React.createRef();
     static propTypes = {
-        setForm: PropTypes.func.isRequired
+        setForm: PropTypes.func.isRequired,
+        categoryName: PropTypes.string
     }
     componentWillMount(){
         this.props.setForm(this.formRef)
     }
-    render() {
+    componentDidUpdate() {
+        this.formRef.current.setFieldsValue({
+            categoryName: this.props.categoryName,
+        });
+    }
 
+    render() {
+        const { categoryName } = this.props 
         return (
             <div>
-                <Form ref={this.formRef}>
+                <Form ref={this.formRef} >
                     <Item
+                      initialValue={categoryName || ''}
                       name="categoryName"
                       rules={[{ required: true, message: '分类名称必须输入' },
                              ]}>

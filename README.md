@@ -67,3 +67,93 @@
     fn.bind(obj)(2,3) 2 3 1
     fn.bind(obj, 5)(2, 3) 5 2 1
     fn.bind(obj, 5, 6)(2, 3) 5 6 1
+## 自定义实现一组数组声明式方法
+    1)，map() //返回一个新数组
+    2)，reduce()    //返回一个数值
+    3)，filter() //返回一个数组
+    4)，find()  //返回一个数值
+    5)，findIndex() //查找元素下标
+    6)，every() //测试一个数组内的所有元素是否都能通过某个指定函数的测试，返回一个布尔值
+    7)，some() //测试有没有满足这个条件的
+
+   
+    const arr = [1, 3, 5, 7, 9] 
+## 1.map()
+    var arr2 = arr.map((item, index) => {
+
+    })
+    Array.prototype.map = function(callback){
+        const arr = []
+        for(let index = 0; index < this.length; index++){
+            arr.push(callback(this[index], index))
+        }
+        return arr
+    }
+## 2.reduce()
+    //per：上一次统计结果
+    arr.reduce((per, item, index) => {
+
+    }, 0)
+
+    Array.prototype.reduce = function(callback, initValue){
+        const total = initValue
+        for(let index = 0; index < this.length; index++){
+            total = callback(total, this[index], index)
+        }
+        return total
+    }
+## 3.filter()
+    arr2 = arr.filter((item, index) => 判断表达式 true就留下item false就要)
+    Arrar.prototype.filter = function(callback){
+        const arr = []
+        for(let index = 0; index < this.length; index++){
+            if(callback(this[index], index)){
+                arr.push(this[index])
+            }
+        }
+        return arr
+    }
+## 4.find()
+    result = arr.find((item, index) => 判断表达式 查找到都一个满足的数)
+    Array.prototype.find = function(callback){
+        let item
+        for(let index = 0; index < this.length; index++){
+            if(callback(this[index], index)){
+                item = this[index]
+                return item
+            }
+        }
+        
+    }
+## 5.findIndex()
+    result = arr.findIndex((item, index) => 判断表达式 查找到都一个满足的数)
+    Array.prototype.find = function(callback){
+        for(let index = 0; index < this.length; index++){
+            if(callback(this[index], index)){
+                return index
+            }
+        }
+    return -1 //没有找到
+    }
+## 6.every() 
+    result = arr.every((item, index) => item>3) //数组里是不是每一个函数都>3  result = false
+    Array.prototype.every = function(callback){
+        for(let index = 0; index < this.length; index++){
+            if(!callback(this[index], index)){
+                return false
+            }
+        }
+    return true
+    }
+## 7.some()
+
+    result = arr.some((item, index) => item>3) //数组里是否有一个item>3 result = true
+    Array.prototype.some = function(callback){
+        for(let index = 0; index < this.length; index++){
+            if(callback(this[index], index)){
+                return true
+            }
+        }
+    return fasle
+    }
+
