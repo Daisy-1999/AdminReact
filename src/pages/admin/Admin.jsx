@@ -7,7 +7,7 @@ import Header from '../../compontents/header';
 
 import Home from '../home/Home';
 import Category from '../category/Category';
-import Product from '../product/Product';
+import Product from '../product/product';
 import Role from '../role/Role';
 import User from '../user/User';
 import Bar from '../charts/Bar';

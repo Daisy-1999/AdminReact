@@ -46,6 +46,40 @@ export const reqUpdadteCategory = (categoryId, categoryName) => (
     })
 )
 
+//获取商品分页列表
+export const reqProduct = (pageNum, pageSize) => (
+    ajax({
+        method: 'get',
+        url: BASE + '/manage/product/list',
+        params: {
+            pageNum,
+            pageSize
+        }
+    })
+
+)
+export const reqSearchProducts = (pageNum, pageSize, searchName, searchType) => (   //searchType的值是'productName'或者'productDesc'
+    ajax({
+        method: 'get',
+        url: BASE + '/manage/product/search',
+        params: {
+            pageNum,
+            pageSize,
+            [searchType]: searchName //加上了[]直接读取他的属性值
+        }
+    })
+)
+export const reqUpdateStatus = (productId, status) => (
+    ajax({
+        method: 'post',
+        url: BASE+ '/manage/product/updateStatus',
+        data: {
+            productId,
+            status 
+        }
+    })
+
+)
 // export function reqLogin(username, password){
 //     return ajax({
 //         method: 'post',

@@ -6,7 +6,6 @@ import { reqCategorys, reqUpdadteCategory, reqAddCategory } from '../../api/inde
 import LinkButton from '../../compontents/link-button';
 import AddUpdateForm from './add-update-form'
 import { PlusOutlined  } from '@ant-design/icons';
-import './category.less'
 
 export class Category extends Component {
 
@@ -99,7 +98,9 @@ export class Category extends Component {
         const category = this.category || {}
         //Card右侧添加
         const extra = (
-            <Button type="primary" onClick={() => { this.setState({showStatus: 1}) }}>
+            <Button type="primary" onClick={() => { 
+                this.category = {}
+                this.setState({showStatus: 1}) }}>
                 <PlusOutlined />
                 添加
             </Button>
@@ -113,7 +114,7 @@ export class Category extends Component {
                     loading={loading}
                     columns={this.columns}
                     dataSource={categorys}     
-                    pagination={{ defaultPageSize: 7, showQuickJumper: true}}     
+                    pagination={{ defaultPageSize: 6, showQuickJumper: true}}     
                 />
                 <Modal title={ showStatus === 1 ? "添加分类" : "修改分类"} visible={ showStatus!== 0} 
                         onOk={this.handleOk} 
