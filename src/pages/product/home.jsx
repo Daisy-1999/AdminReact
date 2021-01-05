@@ -6,6 +6,7 @@ import { PlusOutlined  } from '@ant-design/icons';
 
 import { reqProduct, reqSearchProducts, reqUpdateStatus } from '../../api/index'
 import { PAGE_SIZE } from '../../utils/Constant'
+import memoryUtils from '../../utils/memoryUtils';
 
 //Product的默认子路由组件
 
@@ -66,8 +67,22 @@ export class ProductHome extends Component {
                 title: '操作',
                 render: (product) => (
                     <span>
-                        <LinkButton onClick={() => this.props.history.push('/product/detail')}>详情</LinkButton>
-                        <LinkButton>修改</LinkButton>
+                        <LinkButton 
+                        onClick={() => {
+                            //在内存中保存product
+                            memoryUtils.product = product
+                            this.props.history.push('/product/detail')
+                        }}
+                        >
+                        详情
+                        </LinkButton><br/>
+                        <LinkButton
+                            onClick={() => {
+                                //在内存中保存product
+                                memoryUtils.product = product
+                                this.props.history.push('/product/addupdate')
+                            }}
+                        >修改</LinkButton>
                     </span>
                 )
             },
@@ -122,7 +137,7 @@ export class ProductHome extends Component {
             </span>
         )
         const extra = (
-            <Button type="primary">
+            <Button type="primary" onClick={ () => this.props.history.push('/product/addupdate')}>
                <PlusOutlined />
                 添加商品
             </Button>

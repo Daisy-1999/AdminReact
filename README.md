@@ -161,3 +161,14 @@
     受控组件：输入过程自动实时收集数据，收集到状态里面
     非受控组件：点击了搜索之后收集数据
 
+## BrowserRouter  HashRouter的区别
+    1)，BrowserRouter 实现的是单页面的路由切换
+        HashRouter 实现的是全局路由切换
+    2)，HashRouter在路径中包含了#，相当于HTML的锚点定位。
+        BrowserRouter使用的是HTML5的新特性History，没有HashRouter(锚点定位)那样通用
+    3)，BrowserRouter进行组件跳转时可以传递任意参数实现组件间的通信，利用BrowserRouter 实现单页面切换
+        HashRouter不能(除非手动拼接URL字符串)， 因此一般配合Redux使用，实现组件间的数据通信。
+## 如何限制事件处理函数频繁调用
+    1），函数节流
+    2），函数防抖
+        

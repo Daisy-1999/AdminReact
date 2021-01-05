@@ -58,6 +58,17 @@ export const reqProduct = (pageNum, pageSize) => (
     })
 
 )
+//根据分类id获取分类
+export const reqCategory = (catagoryId) => (
+    ajax({
+        method: 'get',
+        url: BASE + '/manage/category/info',
+        params: {
+            catagoryId
+        }
+    })
+)
+//根据name/desc搜索产品分页列表
 export const reqSearchProducts = (pageNum, pageSize, searchName, searchType) => (   //searchType的值是'productName'或者'productDesc'
     ajax({
         method: 'get',
@@ -69,6 +80,7 @@ export const reqSearchProducts = (pageNum, pageSize, searchName, searchType) => 
         }
     })
 )
+//更新上下架
 export const reqUpdateStatus = (productId, status) => (
     ajax({
         method: 'post',
